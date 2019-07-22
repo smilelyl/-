@@ -1,16 +1,19 @@
 # CSS
 ## 盒模型
+
   盒模型由content内容、内边距padding、border边框以及外边距margin组成
   分为标准盒模型和IE怪异模型
   标准盒模型的宽高指的是content内容的宽高，IE盒模型的宽高指的是content内容+padding内边距+border边框的宽高
   设置两种盒模型使用：box-sizing:content-box(标准)   box-sizing:boder-box(怪异模型)
 
 ## css选择器权重
+
   !important>内联样式>id选择器>类选择器、伪类选择器、属性选择器>标签选择器、伪元素选择器
   优先级相等的情况，最晚出现的样式被采纳
   写样式的时候使用较低的优先级，修改的时候较容易被覆盖
 
 ## 伪类和伪元素
+
   伪类没有创建一个文档树之外的元素
   伪元素创建了
   伪类： :link :visited :hover :active :first-child :nth-child(n) nth-of-type()等
@@ -31,14 +34,16 @@
   ![absolute1](http://images.51cto.com/files/uploadimg/20100909/1528451.jpg)
   ![absolute2](http://images.51cto.com/files/uploadimg/20100909/1528453.jpg)
 ## 清除浮动
- 浮动元素引起的问题：
-   父元素的高度无法撑开
-   同级元素会紧随其后可能被覆盖
-   如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
- 清除浮动的方法：
-   使用clear:both
-   使用伪元素选择器：：afeter清除浮动，内部使用clear:both
-   设置overflow: auto 或 overflow: hidden 触发 BFC
+浮动元素引起的问题：
+
+* 父元素的高度无法撑开
+* 同级元素会紧随其后可能被覆盖
+* 如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
+清除浮动的方法：
+
+* 使用clear:both
+* 使用伪元素选择器：：afeter清除浮动，内部使用clear:both
+* 设置overflow: auto 或 overflow: hidden 触发 BFC
 ## BFC
   块级格式化上下文，是一个独立的渲染区域，规定了内部的box如何布局，与外部区域不相干
 ### 触发BFC
