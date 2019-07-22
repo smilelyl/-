@@ -284,8 +284,9 @@ flex项目的基本布局
             transform: rotateY(360deg);
         }
     }
-  ### 三角形
+ ### 三角形
    设置方块高度和宽度为0，其他三块的border-color为transparent 
+   ```
     .triangle_up{
         width:0;
         height:0;
@@ -293,8 +294,10 @@ flex项目的基本布局
         border-style:solid;
         boder-color:transparent  transparent  #A76  transparent
     }
+```
   ### 梯形
    设置一个方块color透明，其他不变
+   ```
     .ladder_shape{
         width:100px;
         height:50px;
@@ -302,8 +305,10 @@ flex项目的基本布局
         border-style:solid;
         border-color:transparent transparent #A76 transparent
     }
+```
   ### 平行四边形
    先进行div倾斜操作，在对里面文字反倾斜
+```
     .shape{
         width:100px;
         height:50px;
@@ -320,8 +325,10 @@ flex项目的基本布局
         color:green;
         transform:skewX(50deg);
     }
+```
   ## 三栏布局
   1、浮动布局
+```
     <div class="container">
         <div class="left col">left</div>
         <div class="right col">right</div>
@@ -343,7 +350,9 @@ flex项目的基本布局
     .main {
         margin: 0 102px;
     }
+```
 2、绝对定位
+```
     <div class="container">
         <div class="left col">Left</div>
         <div class="right col">Right</div>
@@ -372,7 +381,9 @@ flex项目的基本布局
     .main {
         margin: 0 102px;
     }
+```
 3、BFC
+```
     <div class="container">
         <div class="left col">left</div>
         <div class="right col">right</div>
@@ -394,7 +405,9 @@ flex项目的基本布局
     .main {
         overflow: hidden;
     }
+```
 4、Flex
+```
     <div class="container">
         <div class="left col">left</div>
         <div class="main col">main</div>
@@ -417,7 +430,9 @@ flex项目的基本布局
     .right {
         width: 100px;
     }
+```
 5、table 布局
+```
     <div class="container">
         <div class="left col">left</div>
         <div class="main col">main</div>
@@ -439,13 +454,15 @@ flex项目的基本布局
     .right {
         width: 100px;
     }
+```
 6、双飞翼布局
 设置一个container，里面包含center（center内部包含一个inner-center）、left、right，center在最前面，先加载center。
-    center、left、right均设置float：left
-    center的width为100%
-    此时center占满了，设置left的margin-left：-100%，设置margin-right：-220px
-    center内容被覆盖，给center加一个内层的inner-center，margin：0 220px 0 200px
-    center设置overflow：hidden去浮动
+   center、left、right均设置float：left
+   center的width为100%
+   此时center占满了，设置left的margin-left：-100%，设置margin-right：-220px
+   center内容被覆盖，给center加一个内层的inner-center，margin：0 220px 0 200px
+   center设置overflow：hidden去浮动
+```
     <div class="doubleFly">
         <div class="container">
             <div class="main col">doubleFly main</div>
@@ -474,8 +491,10 @@ flex项目的基本布局
         float: right;
         margin-left: -100px;
     }
+```
 7、圣杯布局
 三者都float：left，position：relative
+```
     center部分width为100%
     此时center占满了，设置left的margin-left：-100%，设置margin-right：-220px
     会覆盖中心内容，设置container的padding：0 220px 0 200px
@@ -510,8 +529,10 @@ flex项目的基本布局
         margin-left: -100px;
         background: #333;
     }
+```
   ## 垂直居中
    1、行高
+```
     <div class="box">垂直居中</div>
     .box {
         width: 100px;
@@ -519,14 +540,18 @@ flex项目的基本布局
         background: #FEE;
         line-height: 100px;
     }
+```
    2、内边距
+```
     <div class="box">垂直居中</div>
     .box {
         width: 100px;
         background: #FEE;
         padding: 50px 0;
     }
+```
    3、table
+```
     <div class="container">
         <div class="box">垂直居中</div>
     </div>
@@ -540,7 +565,9 @@ flex项目的基本布局
         display: table-cell;
         vertical-align: middle;
     }
+```
    4、定位
+```
     <div class="container">
         <div class="box">垂直居中</div>
     </div>
@@ -555,7 +582,9 @@ flex项目的基本布局
         top: 50%;
         transform: translateY(-50%);
     }
+```
    5、Flex
+```
     <div class="box">垂直居中</div>
     .box {
         width: 100px;
@@ -564,8 +593,10 @@ flex项目的基本布局
         display: flex;
         align-items: center;
     }
+```
   ## 水平居中
   1、外边距
+  ```
     <div class="box"></div>
     .box {
         width: 100px;
@@ -573,7 +604,9 @@ flex项目的基本布局
         background: #FCC;
         margin: 0 auto;
     }
+```
   2、行内块
+  ```
     <div class="container">
         <div class="box"></div>
     </div>
@@ -586,7 +619,9 @@ flex项目的基本布局
         background: #FCC;
         display: inline-block;
     }
+```
   3、绝对定位
+  ```
     <div class="box"></div>
     .box {
         width: 100px;
@@ -596,7 +631,9 @@ flex项目的基本布局
         left: 50%;
         transform: translateX(-50%);
     }
+```
   4、Flex
+  ```
     <div class="container">
         <div class="box"></div>
     </div>
@@ -609,3 +646,4 @@ flex项目的基本布局
         height: 100px;
         background: #FCC;
     }
+```
