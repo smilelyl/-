@@ -1,32 +1,44 @@
-# CSS知识要点
-##  CSS选择器
-### 举例：
-    标签选择器（div）
-    id选择器（#myid）
-    class选择器（#myclass）
-    后代选择器（div a）  div下面所有的a标签
-    子代选择器（div>p)  div下一层的p标签
-    相邻选择器（div+p->div相邻p   div~p->div下所有元素） 
-    通配符选择器（*） 一般使用通配选择器进行重置，来覆盖浏览器的默认规则
-    否定选择器 :not(.link){}
-    伪类选择器 ：:hover{} ：first-child{} 是一种状态
-    伪元素选择器 ::before{} 伪元素本质上是创建了一个虚拟容器(元素)
-    属性选择器 a[href] {color:red;} 
-选择器 	描述
-[attribute] 	用于选取带有指定属性的元素。
-[attribute=value] 	用于选取带有指定属性和值的元素。
-[attribute~=value] 	用于选取属性值中包含指定词汇的元素。
-[attribute|=value] 	用于选取带有以指定值开头的属性值的元素，该值必须是整个单词。
-[attribute^=value] 	匹配属性值以指定值开头的每个元素。
-[attribute$=value] 	匹配属性值以指定值结尾的每个元素。
-[attribute*=value] 	匹配属性值中包含指定值的每个元素。
-### CSS定义权重
-  !important > 行内样式 > ID选择器 > (类选择器 | 属性选择器 | 伪类选择器 ) > 元素选择器 
-## hack
-  让CSS代码能够兼容不同的浏览器，避免错误的布局：
-   属性hack：IE6能识别下划线“_”和星号“*”，IE7能识别星号“*”，但不能识别下划线”_ ”，而firefox两个都不能认识。
-   选择符hack：html #demo { color:red;} / 仅IE6 识别 */     +html #demo { color:red;} / 仅IE7 识别 */
-   IE条件注释
+# CSS
+## 盒模型
+  盒模型由content内容、内边距padding、border边框以及外边距margin组成
+  分为标准盒模型和IE怪异模型
+  标准盒模型的宽高指的是content内容的宽高，IE盒模型的宽高指的是content内容+padding内边距+border边框的宽高
+  设置两种盒模型使用：box-sizing:content-box(标准)   box-sizing:boder-box(怪异模型)
+
+## css选择器权重
+  !important>内联样式>id选择器>类选择器、伪类选择器、属性选择器>标签选择器、伪元素选择器
+  优先级相等的情况，最晚出现的样式被采纳
+  写样式的时候使用较低的优先级，修改的时候较容易被覆盖
+
+## 伪类和伪元素
+  伪类没有创建一个文档树之外的元素
+  伪元素创建了
+  伪类： :link :visited :hover :active :first-child :nth-child(n) nth-of-type()等
+  伪元素： ::before ::after ::first-letter ::first-line等
+  在不指定类型时，:nth-child(n)选中父元素下的第n个子元素；:nth-of-type(n)选中的是父元素下不同标签类型的第n个。
+
+## z-index
+  层叠上下文(background/border)<负z-index<block平盒子<float浮动盒子<inline/inline-block内联盒子<z-index:0或auto<正z-index
+## 定位
+  正常文档流：把页面分成一行一行，块状元素占一行，相邻的行内元素从左到右排成一行直到排满。
+  脱离正常文档流：使用float或者定位改变html文档结构。
+  static：默认值，在正常流中。
+  fixed：固定定位，相对于浏览器窗口
+  relative：脱离正常文档流，但在文档流中的位置仍然存在，相对于最近的父元素，无论是何种定位
+  ![relative1](http://images.51cto.com/files/uploadimg/20100909/1528450.jpg)
+  ![relative2](http://images.51cto.com/files/uploadimg/20100909/1528452.jpg)
+  absolute：脱离文档流，元素不存在于文档流中了，相对于最近的定义为absolute和relative的父层，不一定是直接父层。
+  ![absolute1](http://images.51cto.com/files/uploadimg/20100909/1528451.jpg)
+  ![absolute2](http://images.51cto.com/files/uploadimg/20100909/1528453.jpg)
+## 清除浮动
+ 浮动元素引起的问题：
+    * 父元素的高度无法撑开
+    * 同级元素会紧随其后可能被覆盖
+    * 如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
+  清除浮动的方法：
+    * 使用clear:both
+    * 使用伪元素选择器：：afeter清除浮动，内部使用clear:both
+    * 设置overflow: auto 或 overflow: hidden 触发 BFC
 ## BFC
   块级格式化上下文，是一个独立的渲染区域，规定了内部的box如何布局，与外部区域不相干
 ### 触发BFC
@@ -55,64 +67,80 @@
     清除浮动原理：触发父 div 的 BFC 属性，使下面的子 div 都处在父 div 的同一 BFC 区域之内，由于BFC计算高度时，浮动元素参与计算，因此可以清除浮动。 
     还可以使父 div 向同一个方向浮动来达到清除浮动的目的，清除浮动的原理是两个 div 都位于同一个浮动的 BFC 区域之中。
   * 分属于不同的 BFC 时可以阻止 margin 重叠
-## 清除浮动
- 浮动元素引起的问题：
-    * 父元素的高度无法撑开
-    * 同级元素会紧随其后可能被覆盖
-    * 如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
-  清除浮动的方法：
-    * 使用clear:both
-    * 使用伪元素选择器：：afeter清除浮动，内部使用clear:both
-    * 设置overflow: auto 或 overflow: hidden 触发 BFC
-## stacking level
-  层叠顺序（右下至上）：背景和边框->负z-index->块级元素->浮动元素->行内和行内块元素->z-index:0或auto->正z-index
-  形成层叠上下文的条件：
-    根元素（html）
-    z-index值不为auto的绝对/相对定位
-    z-index值不为auto的flex项目
-    opacity小于1的元素
-    transform不为none的元素
-    mix-blend-mode不为normal的元素
-    filter不为none的元素
-    isolation设置为isolate的元素
-    perspective不为none的元素
-  例子：
 
-```
-<div class="one">
-    <div class="two"></div>
-    <div class="three"></div>
-</div>
+## flex布局
+flex项目的基本布局
+   ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png)
+容器的6个属性：
+- flex-direction（主轴方向）
+      .box{
+          flex-direction:row|row-reserse|column|column-reserve
+      }
+  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png)
+- flex-wrap(nowrap不换行，wrap换行，wrap-reserve第一行在下方)
+- flex-flow（flex-flow：flex-direction||flex-wrap结合）
+- justify-content（主轴排列）
+     .box{
+      justify-content:flex-start|flex-end|flex-center|space-between|space-around
+     }
+  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png)
+- align-items(定义了在交叉轴上的对齐方式)
+      .box {
+            align-items: flex-start | flex-end | center | baseline | stretch;
+      }
+  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png)
+- align-content（多根轴线对齐方式）
+  项目的6个属性
+  - order(定义项目的排列顺序，顺序越小，越在前面)
+  - flex-grow（项目的放大比例）
+  - flex-shrink（项目的缩小比例）
+  - flex-basis
+  - flex（上面三者放在一起）
+  - align-self（允许单个项目与其它项目不同）
+## 多行文本溢出显示省略号
+  overflo:hidden;
+  text-overflow:ellipsis
+## 回到顶部
+  window.scrollTo(0,0);
+## px\em\rem的区别
+  px像素，相对于屏幕分辨率而言
+  em相对长度，相对于父元素的字体尺寸而言
+  rem新增特性，相对于HTML根元素而言，通过调整根元素的字体就可以调整所有字体大小。
 
-<div class="four">
-    <div class="five"></div>
-    <div class="six"></div>
-</div>
-.one{
-    position:relative;
-    z-index:2;
-    .two{
-        z-index: 6;
-    }
-    .three{
-        position: absolute;
-        z-index: 5;
-    }
-}
-
-.four{
-    position:absolute;
-    .five{}
-    .six{
-        position: absolute;
-        left:0;
-        top:0;
-        z-index: -1;
-    }
-}
-
-```
-three two one five four six（由上至下）
+## vw/vh/vmin/vmax
+  vw:100vw视口宽度的100
+  vh:100vh视口高度的100%
+  vmin:vw和vm中较小的值
+  vmax:vw和vm中较大值
+## background-origin的作用
+  新增属性，改变背景起始位置
+  border-box：背景图片的摆放以border区域为参考
+  padding-box：背景图片的摆放以padding区域为参考
+  content-box：背景图片的摆放以content区域为参考
+## 精灵图
+  当需要加载很多小图片时，为避免服务器拥堵，将许多小图片合成一个大图片，利用background-position定位获取相应小图片。
+   如果需要改变一个小图片需要改动整个大图片
+## png、JPEG、svg、webp、gif
+  1. png
+      透明性：png是完全支持alpha透明的（透明、半透明、不透明）
+      动画：它不支持动画 
+  2. jpeg
+      透明性：它不支持透明性
+      动画：它不支持动画 
+      对jpeg图像的处理都会使得它的质量损失
+  3. gif
+      透明性：gif是一种布尔透明类型，即它可以使全透明，也可是全不透明，但是它并没有半透明的（alpha透明
+      动画：gif格式支持动画。
+      无损耗性：gif是一种无损耗的图像格式
+  4. svg
+      SVG 指可伸缩矢量图形 (Scalable Vector Graphics)
+      SVG 用来定义用于网络的基于矢量的图形
+      SVG 使用 XML 格式定义图形
+      SVG 图像在放大或改变尺寸的情况下其图形质量不会有所损失
+      SVG 是万维网联盟的标准
+      SVG 与诸如 DOM和 XSL 之类的W3C标准是一个整体
+  5. webp  
+      WebP是同时支持有损和无损压缩的、使用直接色的、点阵图
 ## FOUC
   浏览器样式闪烁：由于CSS使用@important引用，或者存在多个CSS文件在页面底部引入，导致页面闪烁
   解决：link加载CSS放在head中
@@ -175,54 +203,83 @@ three two one five four six（由上至下）
    过渡只能有初始状态和结束状态，动画可以设置关键帧，控制变化过程中的更多状态
    动画不需要触发条件，HTML载入完成后立即触发
    动画子属性比过渡多，可以控制循环次数，播放方向和动画状态
-##  居中
-   ### 水平居中
-   #### 行内元素居中
-   只针对行内元素（如text、img、button等），或者块状元素display为inline时，而且没有float影响
-   使用 text-align:center
-   #### 块状元素居中
-   ##### 定宽块状元素居中
-   定宽、块状，设置左右margin为auto
-    .div{
-        width:100px;
-        border:1px solid red;
-        margin:0 auto;
+## 编码
+  ### 使一个div占满整个屏幕
+给div设置定位
+    div {
+        width: 100%;
+        height: 100%;
+        background: yellow;
+        position: absolute;
     }
-   ##### 不定宽块状元素居中
-   将要居中的元素放在table里或设置元素的display为table，设置margin：0 auto；
-    .wrap{
-    background:#ccc;
-    display:table;
-    margin:0 auto;
-    }
-    <div class="wrap">
-    Hello world 
+通过html，body的宽高来让div充满屏幕
+    * {
+        margin: 0;
+        padding: 0;
+        }
+        html, body {
+        width: 100%;
+        height: 100%;
+        }
+        div {
+        width: 100%;
+        height: 100%;
+        background: red;
+        }
+
+  ### 硬币旋转
+    <div id="euro">
+        <div class="back"></div>
+        <div class="middle" style="transform: translateZ(1px)"></div>
+        <div class="middle" style="transform: translateZ(2px)"></div>
+        <div class="middle" style="transform: translateZ(3px)"></div>
+        <div class="middle" style="transform: translateZ(4px)"></div>
+        <div class="middle" style="transform: translateZ(5px)"></div>
+        <div class="middle" style="transform: translateZ(6px)"></div>
+        <div class="middle" style="transform: translateZ(7px)"></div>
+        <div class="middle" style="transform: translateZ(8px)"></div>
+        <div class="middle" style="transform: translateZ(9px)"></div>
+        <div class="front" style="transform: translateZ(10px)"></div>
     </div>
-   改变块级元素的display为inline，使用text-align：center,但是不能设置宽高，可以变成inline-block
-   给父元素设置float，给父元素设置position：relative和left:50% 子元素设置position：relative，left：-50%
-   ### 垂直居中
-   #### 父元素高度确定的单行文本
-   设置度元素的height和line-height一样高
-   #### 父元素高度确定的多行文本
-   使用table标签或display设置为table或table-cell，同时设置vertical-align：middle
-   #### 父元素高度不确定
-   父元素position：relative；子元素position：absolute，top：50%，transform：-50%
-## 精灵图
-   当需要加载很多小图片时，为避免服务器拥堵，将许多小图片合成一个大图片，利用background-position定位获取相应小图片。
-   如果需要改变一个小图片需要改动整个大图片
-## css画三角形、梯形和平行四边形
-   方法一：使用border-width
-    .basic_triangle{
-        width:50px;
-        height:50px;
-        border-width:100px 100px 100px 100px;
-        border-style:solid;
-        border-color:#f9a #f81 #A76 #153;
-        margin:20px auto;
+    #euro {
+        width: 150px;
+        height: 150px;
+        margin-left: -75px;
+        margin-top: -75px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-style: preserve-3d;
+        animation: spin 2.5s linear infinite;
     }
-   效果如下图：
-   ![](https://img-blog.csdn.net/20180813174421697?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTAxNzYwOTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-   ### 三角形
+    .back {
+        background-image: url("images/backeuro.png");
+        width: 150px;
+        height: 150px;
+    }
+    .middle {
+        background-image: url("images/backeuro.png");
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+    }
+    .front {
+        background-image: url("images/faceeuro.png");
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+    }
+    @keyframes spin {
+        from {
+            transform: rotateY(0deg);
+        }
+        to {
+            transform: rotateY(360deg);
+        }
+    }
+  ### 三角形
    设置方块高度和宽度为0，其他三块的border-color为transparent 
     .triangle_up{
         width:0;
@@ -231,7 +288,7 @@ three two one five four six（由上至下）
         border-style:solid;
         boder-color:transparent  transparent  #A76  transparent
     }
-   ### 梯形
+  ### 梯形
    设置一个方块color透明，其他不变
     .ladder_shape{
         width:100px;
@@ -240,7 +297,7 @@ three two one five four six（由上至下）
         border-style:solid;
         border-color:transparent transparent #A76 transparent
     }
-   ### 平行四边形
+  ### 平行四边形
    先进行div倾斜操作，在对里面文字反倾斜
     .shape{
         width:100px;
@@ -258,98 +315,292 @@ three two one five four six（由上至下）
         color:green;
         transform:skewX(50deg);
     }
-## 盒模型
-### 标准盒模型
-![](http://img.smyhvae.com/2015-10-03-css-27.jpg)
-### IE盒模型
-![](http://img.smyhvae.com/2015-10-03-css-30.jpg)
-## 13. 文本溢出显示省略号
-   单行文本溢出
-    .ellipsis{
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
+  ## 三栏布局
+  1、浮动布局
+    <div class="container">
+        <div class="left col">left</div>
+        <div class="right col">right</div>
+        <div class="main col">main</div>
+    </div>
+    .col {
+        min-height: 100px;
+        background: #eee;
+        border: 1px solid #666;
     }
-   多行文本溢出
-    .ellipsis::after{
-        content:"...";
-        position:absolute;
-        backgroud:-webkit-linear-gradient(left,transparent,#fff 62%);
-        backgroud:-o-linear-gradient(left,transparent,#fff 62%);
-        backgroud:-moz-linear-gradient(left,transparent,#fff 62%);
-        background:linear-gradient(to right,transparent,#fff 63%)
+    .left {
+        float: left;
+        width: 100px;
     }
-   js实现：
-    function mitulineHide(num,con){ var contain = document.getElementById(con);
-        console.log(con);
-        var maxSize = num;
-        var txt = contain.innerHTML;
-        if(txt.length>num){ console.log('1');
-            txt = txt.substring(0,num-1)+"...";
-            contain.innerHTML = txt;
-        }else{ console.log("error") } };
-    mitulineHide(10,'ellipsis');
-
-## 回到顶部
-## canvas
-## absolute fixed relative static
-   正常文档流：把页面分成一行一行的，块元素单独占一行，相邻的行内元素从左到右排成一行直到该行排满
-   脱离正常文档流：使用浮动或定位去改变HTML文档结构
-    static：默认值。没有定位，元素在正常流中（忽略trbl或z-index声明）
-    fixed:固定定位，相对于浏览器窗口进行定位
-    relative：元素脱离正常文档流，但其在文档流中仍然存在；relative定位的层总是相对于最近的父元素，无论父元素是何种定位方式。
-   ![relative1](http://images.51cto.com/files/uploadimg/20100909/1528450.jpg)
-   ![relative2](http://images.51cto.com/files/uploadimg/20100909/1528452.jpg)
-    absolute：元素脱离正常文档流，并且元素不存在于文档流中了；absolute定位的层相对于最近的定义为absolute和relative的父层，不一定是直接父层。
-   ![absolute1](http://images.51cto.com/files/uploadimg/20100909/1528451.jpg)
-   ![absolute2](http://images.51cto.com/files/uploadimg/20100909/1528453.jpg)
-## 三栏布局
-### 双飞翼布局
-    设置一个container，里面包含center（center内部包含一个inner-center）、left、right，center在最前面，先加载center。
+    .right {
+        float: right;
+        width: 100px;
+    }
+    .main {
+        margin: 0 102px;
+    }
+2、绝对定位
+    <div class="container">
+        <div class="left col">Left</div>
+        <div class="right col">Right</div>
+        <div class="main col">Main</div>
+    </div>
+    .container {
+        position: relative;
+    }
+    .col {
+        min-height: 100px;
+        background: #eee;
+        border: 1px solid #666;
+    }
+    .left, .right {
+        position: absolute;
+        top: 0;
+    }
+    .left {
+        left: 0;
+        width: 100px;
+    }
+    .right {
+        right: 0;
+        width: 100px;
+    }
+    .main {
+        margin: 0 102px;
+    }
+3、BFC
+    <div class="container">
+        <div class="left col">left</div>
+        <div class="right col">right</div>
+        <div class="main col">main</div>
+    </div>
+    .col {
+        min-height: 100px;
+        background: #eee;
+        border: 1px solid #666;
+    }
+    .left {
+        float: left;
+        width: 100px;
+    }
+    .right {
+        float: right;
+        width: 100px;
+    }
+    .main {
+        overflow: hidden;
+    }
+4、Flex
+    <div class="container">
+        <div class="left col">left</div>
+        <div class="main col">main</div>
+        <div class="right col">right</div>
+    </div>
+    .container {
+        display: flex;
+    }
+    .col {
+        min-height: 100px;
+        background: #eee;
+        border: 1px solid #666;
+    }
+    .left {
+        width: 100px;
+    }
+    .main {
+        flex: 1;
+    }
+    .right {
+        width: 100px;
+    }
+5、table 布局
+    <div class="container">
+        <div class="left col">left</div>
+        <div class="main col">main</div>
+        <div class="right col">right</div>
+    </div>
+    .container {
+        display: table;
+        width: 100%;
+        min-height: 100px;
+    }
+    .col {
+        display: table-cell;
+        background: #eee;
+        border: 1px solid #666;
+    }
+    .left {
+        width: 100px;
+    }
+    .right {
+        width: 100px;
+    }
+6、双飞翼布局
+设置一个container，里面包含center（center内部包含一个inner-center）、left、right，center在最前面，先加载center。
     center、left、right均设置float：left
     center的width为100%
     此时center占满了，设置left的margin-left：-100%，设置margin-right：-220px
     center内容被覆盖，给center加一个内层的inner-center，margin：0 220px 0 200px
     center设置overflow：hidden去浮动
-### 圣杯布局
-    三者都float：left，position：relative
+    <div class="doubleFly">
+        <div class="container">
+            <div class="main col">doubleFly main</div>
+        </div>
+        <div class="left  col">left</div>
+        <div class="right col">right</div>
+    </div>
+    .container {
+        width: 100%;
+        float: left;
+    }
+    .col {
+        min-height: 100px;
+    }
+    .main {
+        margin: 0 100px;
+        background: #666;
+    }
+    .left {
+        width: 100px;
+        float: left;
+        margin-left: -100%;
+    }
+    .right {
+        width: 100px;
+        float: right;
+        margin-left: -100px;
+    }
+7、圣杯布局
+三者都float：left，position：relative
     center部分width为100%
     此时center占满了，设置left的margin-left：-100%，设置margin-right：-220px
     会覆盖中心内容，设置container的padding：0 220px 0 200px
     还原left位置left:-200px right位置：-220px
-### 伸缩盒布局
-## SEO
-## HTML5 为什么只需要写<!DOCTYPE HTML>
-   HTML5不基于SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为。
-   而HTML4.01基于SGML，所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
-##  flex布局
-   flex项目的基本布局
-   ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png)
-容器的6个属性：
-- flex-direction（主轴方向）
-  .box{
-      flex-direction:row|row-reserse|column|column-reserve
-  }
-  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png)
-- flex-wrap(nowrap不换行，wrap换行，wrap-reserve第一行在下方)
-- flex-flow（flex-flow：<flex-direction>||<flex-wrap>结合）
-- justify-content（主轴排列）
-  .box{
-      justify-content:flex-start|flex-end|flex-center|space-between|space-around
-  }
-  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png)
-- align-items(定义了在交叉轴上的对齐方式)
-  .box {
-        align-items: flex-start | flex-end | center | baseline | stretch;
-  }
-  ![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png)
-- align-content（多根轴线对齐方式）
-  项目的6个属性
-  - order(定义项目的排列顺序，顺序越小，越在前面)
-  - flex-grow（项目的放大比例）
-  - flex-shrink（项目的缩小比例）
-  - flex-basis
-  - flex（上面三者放在一起）
-  - align-self（允许单个项目与其它项目不同）
-
-
+    <div class="container">
+        <div class="main col">main</div>
+        <div class="left col">left</div>
+        <div class="right col">right</div>
+    </div>
+    .container {
+        margin: 0 100px;
+    }
+    .col {
+        min-height: 100px;
+        float: left;
+    }
+    .main {
+        width: 100%;
+        background: #666;
+    }
+    .left {
+        width: 100px;
+        position: relative;
+        left: -100px;
+        margin-left: -100%;
+        background: #999;
+    }
+    .right {
+        width: 100px;
+        position: relative;
+        right: -100px;
+        margin-left: -100px;
+        background: #333;
+    }
+  ## 垂直居中
+   1、行高
+    <div class="box">垂直居中</div>
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FEE;
+        line-height: 100px;
+    }
+   2、内边距
+    <div class="box">垂直居中</div>
+    .box {
+        width: 100px;
+        background: #FEE;
+        padding: 50px 0;
+    }
+   3、table
+    <div class="container">
+        <div class="box">垂直居中</div>
+    </div>
+    .container {
+        width: 100px;
+        height: 100px;
+        background: #FEE 
+        display: table;
+    }
+    .box {
+        display: table-cell;
+        vertical-align: middle;
+    }
+   4、定位
+    <div class="container">
+        <div class="box">垂直居中</div>
+    </div>
+    .container {
+        width: 100px;
+        height: 100px;
+        background: #FEE;
+        position: relative;
+    }
+    .box {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+   5、Flex
+    <div class="box">垂直居中</div>
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FEE;
+        display: flex;
+        align-items: center;
+    }
+  ## 水平居中
+  1、外边距
+    <div class="box"></div>
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FCC;
+        margin: 0 auto;
+    }
+  2、行内块
+    <div class="container">
+        <div class="box"></div>
+    </div>
+    .container {
+        text-align: center;
+    }
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FCC;
+        display: inline-block;
+    }
+  3、绝对定位
+    <div class="box"></div>
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FCC;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+  4、Flex
+    <div class="container">
+        <div class="box"></div>
+    </div>
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+    .box {
+        width: 100px;
+        height: 100px;
+        background: #FCC;
+    }
