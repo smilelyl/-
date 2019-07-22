@@ -30,6 +30,7 @@
 ## BFC
   块级格式化上下文，是一个独立的渲染区域，规定了内部的box如何布局，与外部区域不相干
 ### 触发BFC
+
   根元素，即 HTML 元素
   float 的值不为 none
   overflow 的值不为 visible
