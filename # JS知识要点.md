@@ -44,6 +44,7 @@
    #### 事件代理/委托：
    将事件绑定在父元素上，利用冒泡事件触发该事件。优点：可以减少事件注册，节省内存；可以将事件应用于动态添加的子元素上。
    点击UL下的li元素
+```
     var ulClick=document.getElementById("ulClick");
     window.onload=function(){
         ulClick.onclick=function (ev) {
@@ -54,6 +55,7 @@
             }
         }
     }
+```
 e.target指向引发触发事件的元素（点击的li），e.currentTarget指向的是给绑定事件监听的那个对象（ul）
 
 ## 图片懒加载
