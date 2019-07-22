@@ -13,11 +13,14 @@
   优先级相等的情况，最晚出现的样式被采纳，写样式的时候使用较低的优先级，修改的时候较容易被覆盖
 
 ## 伪类和伪元素
-
   伪类没有创建一个文档树之外的元素
+  
   伪元素创建了
+  
   伪类： :link :visited :hover :active :first-child :nth-child(n) nth-of-type()等
+  
   伪元素： ::before ::after ::first-letter ::first-line等
+  
   在不指定类型时，:nth-child(n)选中父元素下的第n个子元素；:nth-of-type(n)选中的是父元素下不同标签类型的第n个。
 
 ## z-index
