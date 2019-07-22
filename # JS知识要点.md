@@ -5,26 +5,32 @@
   navigator包含客户端浏览器信息（包括浏览器名称、版本号、操作系统）
   sceen客户端显示屏信息
   history浏览器窗口访问过的URL（history.back返回上次访问地址，history.back(2)返回上上次）
-   属性名	             说明
-   history.length	表示会话历史中元素的数目，包括当前加载的页
-   history.scrollRestoration	允许web应用程序在历史导航上显式地设置默认滚动恢复行为，此属性可以是自动的（auto）或者手动的（manual）
-   history.state	返回一个表示历史堆栈顶部地状态的值
-   方法名	                 说明
-   history.back()	前往上一页，等价于history.go(-1)
-   history.forward()	前往下一页，等价于history.go(1)
-   history.go()	通过当前页面的相对位置从浏览器历史记录加载页面
-   **history.pushState()	按指定的名称和URL将数据push进会话历史栈**
-   history.replaceState()	按指定的数据，名称和URL，更新历史栈上最新的入口
-   location当前URL的信息（浏览器中的地址栏，可以显示端口号服务器等）
-   属性名	           例子	                            说明
-   hash	"#contents"	返回URL中的hash（#后跟零或多个字符）
-   host	"www.wrox.com:80"	返回服务器名称和端口号（如果有）
-   hostname	"www.wrox.com"	返回不带端口号的服务器名称
-   href	"https:/www.wrox.com"	返回当前加载页面的完整URL
-   pathname	"/WileyCDA/"	返回URL中的目录和（或）文件名
-   port	"8080"	返回URL中指定的端口号（如果有）
-   protocol	"https:"	返回页面使用的协议
-   search	"?q=javascript	返回URL的查询字符串（以?开头）
+
+|属性名|说明|
+|:---:|:---:|
+|history.length|表示会话历史中元素的数目，包括当前加载的页|
+|history.scrollRestoration|允许web应用程序在历史导航上显式地设置默认滚动恢复行为，此属性可以是自动的（auto）或者手动的（manual)|
+|history.state|返回一个表示历史堆栈顶部地状态的值|
+
+|方法名|说明|
+|:---:|:---:|
+|history.back()|前往上一页，等价于history.go(-1)|
+|history.forward()|前往下一页，等价于history.go(1)|
+|history.go()	通过当前页面的相对位置从浏览器历史记录加载页面|
+|**history.pushState()|按指定的名称和URL将数据push进会话历史栈**|
+|history.replaceState()|按指定的数据，名称和URL，更新历史栈上最新的入口|
+|location当前URL的信息（浏览器中的地址栏，可以显示端口号服务器等）|
+
+|属性名|例子|说明|
+|:---:|:---:|:---:|
+|hash|"#contents"|返回URL中的hash（#后跟零或多个字符）|
+|host|"www.wrox.com:80" |返回服务器名称和端口号（如果有）|
+|hostname|"www.wrox.com" |返回不带端口号的服务器名称|
+|href|"https:/www.wrox.com"	|返回当前加载页面的完整URL|
+|pathname|"/WileyCDA/" |返回URL中的目录和（或）文件名|
+|port|"8080" |返回URL中指定的端口号（如果有）|
+|protocol|"https:" |返回页面使用的协议|
+|search|"?q=javascript |返回URL的查询字符串（以?开头）|
   ### offsetWidth/offsetHeight、clientWidth/clientHeight、scrollWidth/scrollHeight
    offsetWidth/offsetHeight返回content+padding+border
    clientWidth/clientHeight返回content+padding
