@@ -36,25 +36,25 @@
   * display 的值为 inline-block、table-cell、table-caption
   * position 的值为 absolute 或 fixed
 ### 布局规则
-  内部的 Box 会在垂直方向，一个接一个地放置。
-  Box 垂直方向的距离由 margin 决定。属于同一个 BFC 的两个相邻 Box 的 margin 会发生重叠。
-  每个元素的 margin box 的左边，与包含块 border box 的左边相接触（对于从左向右的格式化，否则相反）。即使存在浮动也是如此。
-  BFC 的区域不会与 float box 重叠。
-  BFC 就是页面上一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
-  计算 BFC 的高度时，浮动元素参与计算。
+  * 内部的 Box 会在垂直方向，一个接一个地放置。
+  * Box 垂直方向的距离由 margin 决定。属于同一个 BFC 的两个相邻 Box 的 margin 会发生重叠。
+  * 每个元素的 margin box 的左边，与包含块 border box 的左边相接触（对于从左向右的格式化，否则相反）。即使存在浮动也是如此。
+  * BFC 的区域不会与 float box 重叠。
+  * BFC 就是页面上一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
+  * 计算 BFC 的高度时，浮动元素参与计算。
 ### 作用
-  自适应两栏布局：
-  利用BFC不会与float box重叠，左边设置float
-  阻止元素被浮动元素覆盖：
-  上面的 box：margin-bottom: 100px; 下面的 box：margin-top: 100px;（他们是同一侧的 margin，所以会发生 margin 重叠的情况，两个 div 的距离实际上只有 100px。）
-  这个时候 BFC 的作用 4：阻止 margin 重叠 就派上了用场：
-  当两个相邻块级子元素分属于不同的 BFC 时可以阻止 margin 重叠。
-  操作方法：给其中一个 div 外面包一个 div，然后通过触发外面这个 div 的 BFC，就可以阻止这两个 div 的 margin 重叠，具体触发方式可以参考上文给出的触发条件。
-  可以包含浮动元素——清除内部浮动：
-  给父 div 加上 overflow: hidden;
-  清除浮动原理：触发父 div 的 BFC 属性，使下面的子 div 都处在父 div 的同一 BFC 区域之内，此时已成功清除浮动。 
-   还可以使父 div 向同一个方向浮动来达到清除浮动的目的，清除浮动的原理是两个 div 都位于同一个浮动的 BFC 区域之中。
-   分属于不同的 BFC 时可以阻止 margin 重叠	
+  * 自适应两栏布局：
+    利用BFC不会与float box重叠，左边设置float
+  * 阻止元素被浮动元素覆盖：
+    上面的 box：margin-bottom: 100px; 下面的 box：margin-top: 100px;（他们是同一侧的 margin，所以会发生 margin 重叠的情况，两个 div 的距离实际上只有 100px。）
+    这个时候 BFC 的作用4：阻止 margin 重叠 就派上了用场：
+    当两个相邻块级子元素分属于不同的 BFC 时可以阻止 margin 重叠。
+    操作方法：给其中一个 div 外面包一个 div，然后通过触发外面这个 div 的 BFC，就可以阻止这两个 div 的 margin 重叠，具体触发方式可以参考上文给出的触发条件。
+  * 可以包含浮动元素——清除内部浮动：
+    给父 div 加上 overflow: hidden;
+    清除浮动原理：触发父 div 的 BFC 属性，使下面的子 div 都处在父 div 的同一 BFC 区域之内，此时已成功清除浮动。 
+    还可以使父 div 向同一个方向浮动来达到清除浮动的目的，清除浮动的原理是两个 div 都位于同一个浮动的 BFC 区域之中。
+  * 分属于不同的 BFC 时可以阻止 margin 重叠
 ## 清除浮动
 ### 在父元素最后设置一个空div:
 ```
