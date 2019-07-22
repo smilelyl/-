@@ -30,12 +30,11 @@
 ## BFC
   块级格式化上下文，是一个独立的渲染区域，规定了内部的box如何布局，与外部区域不相干
 ### 触发BFC
-
-  根元素，即 HTML 元素
-  float 的值不为 none
-  overflow 的值不为 visible
-  display 的值为 inline-block、table-cell、table-caption
-  position 的值为 absolute 或 fixed
+   根元素，即 HTML 元素
+   float 的值不为 none
+   overflow 的值不为 visible
+   display 的值为 inline-block、table-cell、table-caption
+   position 的值为 absolute 或 fixed
 ### 布局规则
   内部的 Box 会在垂直方向，一个接一个地放置。
   Box 垂直方向的距离由 margin 决定。属于同一个 BFC 的两个相邻 Box 的 margin 会发生重叠。
