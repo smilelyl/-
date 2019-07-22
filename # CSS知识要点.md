@@ -1,7 +1,7 @@
 # CSS
 ## 盒模型
-
   盒模型由content内容、内边距padding、border边框以及外边距margin组成。
+  
   分为标准盒模型和IE怪异模型。
   标准盒模型的宽高指的是content内容的宽高，IE盒模型的宽高指的是content内容+padding内边距+border边框的宽高
   设置两种盒模型使用：box-sizing:content-box(标准)   box-sizing:boder-box(怪异模型)
