@@ -52,26 +52,18 @@
     操作方法：给其中一个 div 外面包一个 div，然后通过触发外面这个 div 的 BFC，就可以阻止这两个 div 的 margin 重叠，具体触发方式可以参考上文给出的触发条件。
   * 可以包含浮动元素——清除内部浮动：
     给父 div 加上 overflow: hidden;
-    清除浮动原理：触发父 div 的 BFC 属性，使下面的子 div 都处在父 div 的同一 BFC 区域之内，此时已成功清除浮动。 
+    清除浮动原理：触发父 div 的 BFC 属性，使下面的子 div 都处在父 div 的同一 BFC 区域之内，由于BFC计算高度时，浮动元素参与计算，因此可以清除浮动。 
     还可以使父 div 向同一个方向浮动来达到清除浮动的目的，清除浮动的原理是两个 div 都位于同一个浮动的 BFC 区域之中。
   * 分属于不同的 BFC 时可以阻止 margin 重叠
 ## 清除浮动
-### 在父元素最后设置一个空div:
-```
-<div style="clear:both;"></div>
-```
-
-### 触发BFC：
-
-```
-<div  class="div1" style="overflow: hidden">
-```
-
-### after：
-```
-.clearfloat:after{content:"";display:table;clear:both}
-```
-
+ 浮动元素引起的问题：
+    * 父元素的高度无法撑开
+    * 同级元素会紧随其后可能被覆盖
+    * 如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
+  清除浮动的方法：
+    * 使用clear:both
+    * 使用伪元素选择器：：afeter清除浮动，内部使用clear:both
+    * 设置overflow: auto 或 overflow: hidden 触发 BFC
 ## stacking level
   层叠顺序（右下至上）：背景和边框->负z-index->块级元素->浮动元素->行内和行内块元素->z-index:0或auto->正z-index
   形成层叠上下文的条件：
