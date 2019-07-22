@@ -105,15 +105,15 @@
    原理:可以通过相应的标签从不同的域名下加载静态资源，基于此原理，可以动态创建script标签，请求一个带参网址实现跨域通信。
    原生实现：
    /*jsonp跨域*/
-<script>
-    var script=document.createElement('script');
-    script.type='text/javascript';
-    //传参并指定回调函数
-    script.src='http://www.domain2.com:8080/login?user=admin&callback=onback';
-    function onback(res) {
-        alert(JSON.stringify(res))
-    }
-</script>
+      <script>
+          var script=document.createElement('script');
+          script.type='text/javascript';
+          //传参并指定回调函数
+          script.src='http://www.domain2.com:8080/login?user=admin&callback=onback';
+          function onback(res) {
+              alert(JSON.stringify(res))
+          }
+      </script>
 ### CROS
    如果不带cookie，则前端不需要设置，如果带cookie则前端后台均需设置。服务器端设置Access-Control-Allow-Origin即可。
    若有cookie，前端原生设置：
@@ -499,6 +499,3 @@
         delete context.fn;
         return result;
     }
-## 项目经历
-   难点1：使用cesium.js插件的时候，开发文档特别少，实验室前面关于地图的开发使用的均为openlayer，功能说明文档比较完善，关于数据库数据的存储和geoserver发布数据库中的数据选择直接取经，而对于cesium这一块则需要自己研究每个功能的实现，比如获取图层上坐标点的属性的时候，cesium自带了一个控件，获取图层属性，但是显示的属性只有一个，而且想要实现的样式与目的不符，因此通过查看源代码，查看控件调用的方法，修改源代码中wms的拼接方式，设置feature_count为50，同理解决了图层透明度的问题，在这个过程中收获很多。
-   难点二：之前实验室都是团队合作或者自己做一个新项目，到新的实验室之后是接手一个已经发布过的项目，进行后期的维护，最关键的就是理清各个方面的逻辑，但是比较好的一点是实验室的文档很完善，通过阅读文档，能够快速定位，在利用浏览器的调试功能，能比较快速的找到问题并解决。
