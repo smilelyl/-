@@ -3,14 +3,14 @@
   盒模型由content内容、内边距padding、border边框以及外边距margin组成。
   
   分为标准盒模型和IE怪异模型。
-  标准盒模型的宽高指的是content内容的宽高，IE盒模型的宽高指的是content内容+padding内边距+border边框的宽高
+  
+  标准盒模型的宽高指的是content内容的宽高，IE盒模型的宽高指的是content内容+padding内边距+border边框的宽高。
   设置两种盒模型使用：box-sizing:content-box(标准)   box-sizing:boder-box(怪异模型)
 
 ## css选择器权重
-
   !important>内联样式>id选择器>类选择器、伪类选择器、属性选择器>标签选择器、伪元素选择器
-  优先级相等的情况，最晚出现的样式被采纳
-  写样式的时候使用较低的优先级，修改的时候较容易被覆盖
+  
+  优先级相等的情况，最晚出现的样式被采纳，写样式的时候使用较低的优先级，修改的时候较容易被覆盖
 
 ## 伪类和伪元素
 
