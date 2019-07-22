@@ -32,13 +32,13 @@
   ![absolute2](http://images.51cto.com/files/uploadimg/20100909/1528453.jpg)
 ## 清除浮动
  浮动元素引起的问题：
-    * 父元素的高度无法撑开
-    * 同级元素会紧随其后可能被覆盖
-    * 如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
-  清除浮动的方法：
-    * 使用clear:both
-    * 使用伪元素选择器：：afeter清除浮动，内部使用clear:both
-    * 设置overflow: auto 或 overflow: hidden 触发 BFC
+   父元素的高度无法撑开
+   同级元素会紧随其后可能被覆盖
+   如果一个元素浮动，该元素之前的元素也需要浮动，否则可能会影响页面显示的结构。
+ 清除浮动的方法：
+   使用clear:both
+   使用伪元素选择器：：afeter清除浮动，内部使用clear:both
+   设置overflow: auto 或 overflow: hidden 触发 BFC
 ## BFC
   块级格式化上下文，是一个独立的渲染区域，规定了内部的box如何布局，与外部区域不相干
 ### 触发BFC
