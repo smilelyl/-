@@ -92,7 +92,7 @@
       obj.__proto__ = Constructor.prototype;
       var ret = Constructor.apply(obj, arguments);
       return typeof ret === 'object' ? ret : obj;
-   };
+    }；
 ## cookie webstorage
 ### cookie
    在客户端记录用户身份，cookie数据始终在同源http请求中携带，会在浏览器和服务器中来回传递。大小为4k，设置的cookie过期时间内一直有效，可以在同源且符合path规则的文档间共享。
