@@ -589,7 +589,89 @@ function debounce(func,wait){
    箭头函数不能作为构造函数
    call和apply方法只有参数没有作用域
 ### 继承
-   ES5：
+JavaScript继承是依靠prototype实现的，先面介绍六种继承方式并介绍其优缺点，参考自[JavaScript常见的几种继承方式](https://segmentfault.com/a/1190000016708006)
+先定义一个父类
+```
+  //父类
+  function Person(name){
+      this.name=name;
+      this.sum=function(){
+          alert(this.name)
+      }
+  }
+  Person.peototype.age=10;
+```
+1.原型链继承
+```
+  //子类
+  function Stu(){
+      this.name="ker";
+  }
+  Stu.prototype=new Person(); //子类的原型为父类的一个实例对象
+  var stu1=new Stu();
+  console.log(stu1.age)  //10
+```
+方法：让子类的原型等于父类的一个实例对象。
+特点：简单易于实现，子类能够访问到父类新增的原型属性和方法
+缺点：子类无法向父类传参，想要向子类新增属性的时候必须在Stu.prototype=new Person();之后执行，来自原型对象的所有属性被所有实例共享，无法实现多继承。
+2.借用构造函数继承
+  function Stu(){
+      Person.call(this,"jer");
+      this.age=12;
+  }
+  var stu1=new Stu();
+  console.log(stu1.name); //"jer"
+  console.log(stu1 instanceof Person) //"false"
+方法：使用call和apply方法在子类构造函数中调用父类构造函数
+特点：可以实现多继承，创造子类实例时可以向父类传递参数，无法继承父类原型属性
+缺点：只能继承父类的实例属性和方法，不能继承原型属性和方法，无法实现函数复用，每个子类都有父类实例函数的副本，影响性能。
+3.组合继承（原型链+构造函数）
+```
+  function Stu(name){
+      Person.call(this,arguments);
+  }
+  Stu.prototype=new Person();
+  var stu1=new Stu("jer")
+  console.log(stu1.name); //"jer"
+  console.log(stu1.age); //10
+```
+方法：将上述两种方式结合
+特点：可以传参和复用，每个新实例引入的构造函数属性是私有的
+缺点：调用了两次父类构造函数，生成了两份实例。
+4.寄生继承方法
+```
+  //用于创建一个对象副本
+  function content(obj){
+      function F(){};
+      F.prototype=obj;
+      return new F();
+  }
+  var stu=new Person();
+  //上面是原型式继承：无法复用
+  function stuobject(obj){
+      var stu=content(obj);
+      stu.name="jer";
+      return sub;
+  }
+  var stu2=stuobject(stu);
+```
+方法：子类的原型指向父类副本的实例，从而实现原型共享
+使用Object.create(父对象)，可以传参，无法复用。
+5.寄生组合方式（寄生+构造）
+```
+  function content(obj){
+      function F(){};
+      F.prototype=obj;
+      return new F();
+  }
+  var con=content(Person.prototype);
+  function Stu(){
+      Person.call(this);
+  }
+  Stu.prototypr=con;
+  con.constuctor=Stu;
+```
+6.ES5：
 ```
     function Super() {}
     Super.prototype.getNumber = function() {
@@ -607,7 +689,8 @@ function debounce(func,wait){
       }
     })
 ```
-   ES5实现思路就是将子类的原型设置为父类的原型，ES6使用class实现
+   ES5实现思路就是将子类的原型设置为父类的原型
+7.ES6使用class实现
 ```
     class MyDate extends Date {
       test() {
