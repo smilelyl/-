@@ -40,7 +40,9 @@
 ## DOM
    ### DOM级别
    DOM0 xx.onclick=function(){};将一个函数赋值给一个事件处理属性
+   
    DOM2 addEventListener，给一个处理程序添加多个处理函数
+   
    DOM3 增加了更多的事件类型（UI事件、鼠标事件、键盘事件、焦点事件、滚轮事件）
 
    ### 事件流
