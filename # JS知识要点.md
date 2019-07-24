@@ -33,7 +33,9 @@
 |search|"?q=javascript |返回URL的查询字符串（以?开头）|
   ### offsetWidth/offsetHeight、clientWidth/clientHeight、scrollWidth/scrollHeight
    offsetWidth/offsetHeight返回content+padding+border
+   
    clientWidth/clientHeight返回content+padding
+   
    scrollWidth/scrollHeight返回content+padding+溢出内容的尺寸
 ## DOM
    ### DOM级别
