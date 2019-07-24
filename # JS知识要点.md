@@ -16,10 +16,10 @@
 |:---:|:---:|
 |history.back()|前往上一页，等价于history.go(-1)|
 |history.forward()|前往下一页，等价于history.go(1)|
-|history.go()	通过当前页面的相对位置从浏览器历史记录加载页面|
+|history.go()|通过当前页面的相对位置从浏览器历史记录加载页面|
 |**history.pushState()|按指定的名称和URL将数据push进会话历史栈**|
 |history.replaceState()|按指定的数据，名称和URL，更新历史栈上最新的入口|
-|location当前URL的信息（浏览器中的地址栏，可以显示端口号服务器等）|
+|location|当前URL的信息（浏览器中的地址栏，可以显示端口号服务器等）|
 
 |属性名|例子|说明|
 |:---:|:---:|:---:|
