@@ -1,4 +1,7 @@
 # CSS
+## 优雅降级与渐进增强
+  优雅降级：一开始构建完整的功能，然后对低版本进行兼容
+  渐进增强：一开始针对低版本浏览器进行构建，然后再针对高级浏览器进行效果交互等的改进。
 ## 盒模型
   盒模型由content内容、内边距padding、border边框以及外边距margin组成。
   
@@ -23,6 +26,9 @@
   
   在不指定类型时，:nth-child(n)选中父元素下的第n个子元素；:nth-of-type(n)选中的是父元素下不同标签类型的第n个。
 
+## 块属性标签与行内属性标签
+  块属性标签：div h1-h6 ol ul li dl table p br form
+  行内属性标签：span a img em strong textarea select option input
 ## z-index
   层叠上下文(background/border)<负z-index<block平盒子<float浮动盒子<inline/inline-block内联盒子<z-index:0或auto<正z-index
 ## 定位
@@ -111,10 +117,9 @@ flex项目的基本布局
 ## 回到顶部
   window.scrollTo(0,0);
 ## px\em\rem的区别
-  px像素，相对于屏幕分辨率而言
-  em相对长度，相对于父元素的字体尺寸而言
+  px像素，相对于屏幕分辨率而言，px的值是固定的。
+  em相对长度，相对于容器元素的字体尺寸而言，可以继承父元素的字体大小
   rem新增特性，相对于HTML根元素而言，通过调整根元素的字体就可以调整所有字体大小。
-
 ## vw/vh/vmin/vmax
   vw:100vw视口宽度的100
   vh:100vh视口高度的100%
@@ -132,10 +137,12 @@ flex项目的基本布局
   1. png
       透明性：png是完全支持alpha透明的（透明、半透明、不透明）
       动画：它不支持动画 
+      支持无损压缩、保真度高、文件稍大
   2. jpeg
       透明性：它不支持透明性
       动画：它不支持动画 
       对jpeg图像的处理都会使得它的质量损失
+      压缩率高、文件小、最常用。
   3. gif
       透明性：gif是一种布尔透明类型，即它可以使全透明，也可是全不透明，但是它并没有半透明的（alpha透明
       动画：gif格式支持动画。
@@ -149,6 +156,8 @@ flex项目的基本布局
       SVG 与诸如 DOM和 XSL 之类的W3C标准是一个整体
   5. webp  
       WebP是同时支持有损和无损压缩的、使用直接色的、点阵图
+## raba()和opacity的透明效果的不同
+  rgba()和opacity都能实现透明效果，但是opacity作用于元素，可以设置元素内所有内容透明度，rgba()只作用于元素的颜色和背景色，子元素不会继承透明效果。
 ## FOUC
   浏览器样式闪烁：由于CSS使用@important引用，或者存在多个CSS文件在页面底部引入，导致页面闪烁
   解决：link加载CSS放在head中
