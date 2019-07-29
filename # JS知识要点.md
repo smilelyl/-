@@ -37,6 +37,12 @@
    clientWidth/clientHeight返回content+padding
    
    scrollWidth/scrollHeight返回content+padding+溢出内容的尺寸
+## 垃圾回收
+什么是垃圾：没有被引用需要被清除的对象
+垃圾回收机制的方法：
+* 标记清除：
+  
+* 引用计数：
 ## DOM
    ### DOM级别
    DOM0 xx.onclick=function(){};将一个函数赋值给一个事件处理属性
