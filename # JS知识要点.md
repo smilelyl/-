@@ -89,7 +89,100 @@
     }
 ```
 e.target指向引发触发事件的元素（点击的li），e.currentTarget指向的是给绑定事件监听的那个对象（ul）
+## js创建对象的几种方式
 
+1. 对象字面量式
+
+   ```
+   var person={
+       name:"lily",
+       age:21,
+       family:["lida","wang"],
+       say:function(){
+           alert(this.name);
+       }
+   }
+   ```
+
+2. new+object
+
+   ```
+   var person=new Object();
+   person.name="lily";
+   person.family = ["lida","lier","wangwu"];
+   person.say = function(){
+   	alert(this.name);
+   }
+   ```
+
+   上述两种方式不能重复实例化多个对象
+
+3. 工厂模式
+
+   ```
+   function createPerson(name,age,family) {
+       var o = new Object();
+       o.name = name;
+       o.age = age;
+       o.family = family;
+       o.say = function(){
+           alert(this.name);
+       }
+       return o;
+   }
+   ```
+
+   可以实例化多个对象，但是无法确定它是谁的实例
+
+4. 构造函数模式
+
+   ```
+   function Person(name,age,family) {
+       this.name = name;
+       this.age = age;
+       this.family = family;
+       this.say = function(){
+           alert(this.name);
+       }
+   }
+   ```
+
+   可以实例化多个对象，可以知道自己从哪里来，但是每个实例都包含不同的Function实例
+
+5. 原型模式
+
+   ```
+   function Person() {
+   }
+   
+   Person.prototype.name = "lisi";
+   Person.prototype.age = 21;
+   Person.prototype.family = ["lida","lier","wangwu"];
+   Person.prototype.say = function(){
+       alert(this.name);
+   };
+   ```
+
+   所有对象实例共享他的属性和方法，可以设置实例自己的属性，覆盖原型对象上的同名属性。
+
+6. 混合模式（构造+原型）
+
+   ```
+   function Person(name,age,family){
+       this.name = name;
+       this.age = age;
+       this.family = family;
+   }
+   
+   Person.prototype = {
+       constructor: Person,  //每个函数都有prototype属性，指向该函数原型对象，原型对象都有constructor属性，这是一个指向prototype属性所在函数的指针
+       say: function(){
+           alert(this.name);
+       }
+   }
+   ```
+
+   
 ## 图片懒加载
   原理：将页面中的 img 标签 src 指向一张小图片或者 src 为空，然后定义 data-src 属性指向真实的图片，在可视区域内时，将data-src的值赋给src。src指向一张默认的图片，否则当src为空时也会向服务器发送一次请求。可以指向loading的地址。
 ## 常用的DOM操作
