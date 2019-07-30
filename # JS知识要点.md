@@ -291,6 +291,23 @@ function debounce(func,wait){
 
     clickByOneS();
 ```
+闭包的应用之缓存
+```
+/*
+    * 使用立即执行函数
+    * */
+    var cacheConfig = (function(){
+        var obj={};
+        return {
+            setCache:function(k,v){
+                obj[k]=v;
+            },
+            getCache:function(k){
+                return obj[k];
+            }
+        }
+    })();
+```
    闭包的特性：
    * 函数内部可以引用外部的参数和变量
    * 可以避免全局变量污染（多人开发时，使用了相同的变量）
