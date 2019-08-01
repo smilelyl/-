@@ -276,6 +276,7 @@ function test(arr){
     }
     return max;
 }
+
 ```
 
 ## 多层嵌套
@@ -295,6 +296,7 @@ function test(obj){
     }
     return arr;
 }
+
 ```
 
 取出非object型的key值
@@ -306,5 +308,150 @@ function test(obj){
         arr=arr.concat(obj[item].toString()=="[object Object]"?test(obj[item]):item);
     }
     return arr;
+}
+
+```
+
+# JS原生函数实现
+
+## 实现apply、call、bind
+
+1. apply
+
+```
+Function.prototype.myApply=function(context){
+	if(typeof this!=="function"){
+        throw new Error("erro");
+	}
+    context=context||window;
+    context.fn=this;
+    let result;
+    if(arguments[1]){
+        result=context.fn(...arguments[1]);
+    }else{
+        result=context.fn();
+    }
+    delete context.fn;
+    return result;
+}
+
+```
+
+2. call
+
+```
+Function.prototype.myCall=function(context){
+    if(typeof this!=="function"){
+        throw new Error("erro");
+    }
+    context=context||window;
+    context.fn=this;
+    let result;
+    var args=[...arguments].slice(1);
+    result=context.fn(...args);
+    delete context.fn;
+    return result;
+}
+
+```
+
+3. bind
+   Function.prototype.myBind=function(thisArgs){
+    if(typeof this!=="function"){
+        throw new Error("erro");
+    }
+    var fn=this;
+    let args=[...arguments].slice(1);
+    return function F(){
+    	if(this instanceof F){
+            return new fn(...args,...arguments);
+    	}else{
+            return fn.apply(thisArgs,args.concat(...arguments));
+    	}        
+    }
+   }
+4. new
+
+```
+funtion myNew(fun){
+    return function(){
+        let obj={
+            __proto:fun.prototype
+        }
+        fun.apply(obj,...arguments);
+        return obj;
+    }
+}
+
+```
+
+## 功能性
+
+### 节流和防抖
+
+节流：在规定时间只触发一次------滚动条
+
+```
+function throttle(fn,delay){
+    let pre=Date.now();
+    return function(){
+        let now=Date.now();
+        let context=this;
+        if(now-pre>delay){
+            fn.apply(this,aguments);
+            pre=Date.now();
+        }
+    }
+}
+
+```
+
+防抖：在规定时间内未触发则执行，如果再次触发，则清除定时器后再重设
+
+```
+function debounce(fn,delay){
+    let timer=null;
+    return function(){
+        let context=this;
+        let arg=arguments;
+        clearTimeout(timer);
+        timer=setTimeout(function(){
+            fn.apply(context,arg)
+        },delay)
+    }
+}
+```
+
+### 深拷贝
+
+```
+function deepclone(origin){
+    let result=Array.isArray(origin)?[]:{};
+    for(var item in origin){
+        if(origin.hasOwnProperty(item)){
+            if(origin&&typeof origin[item]==="object"){
+                result[item]=Array.isArray(origin[item])?[]:{};
+                result[item]=deepclone(origin[item]);
+            }else{
+                result[item]=origin[item];
+            }
+        }
+    }
+    return result
+}
+```
+
+### 函数柯里化
+
+```
+function curry(fn){
+	var args=[...arguments].slice(1);
+    var f=function(){
+        return curry(fn,args.concat(arguments);)
+    }
+    f.done=function(){
+        return args.reduce((a,b)=>a+b);
+    }
+    return f;
 }
 ```
