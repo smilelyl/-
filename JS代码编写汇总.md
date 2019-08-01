@@ -376,7 +376,7 @@ Function.prototype.myCall=function(context){
 funtion myNew(fun){
     return function(){
         let obj={
-            __proto:fun.prototype
+            __proto__:fun.prototype
         }
         fun.apply(obj,...arguments);
         return obj;
@@ -398,12 +398,11 @@ function throttle(fn,delay){
         let now=Date.now();
         let context=this;
         if(now-pre>delay){
-            fn.apply(this,aguments);
+            fn.apply(context,aguments);
             pre=Date.now();
         }
     }
 }
-
 ```
 
 防抖：在规定时间内未触发则执行，如果再次触发，则清除定时器后再重设
@@ -447,7 +446,7 @@ function deepclone(origin){
 function curry(fn){
 	var args=[...arguments].slice(1);
     var f=function(){
-        return curry(fn,args.concat(arguments);)
+        return curry(fn,args.concat(arguments));
     }
     f.done=function(){
         return args.reduce((a,b)=>a+b);
