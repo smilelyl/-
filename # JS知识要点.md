@@ -434,7 +434,7 @@ function debounce(func,wait){
                 }
                 if(origin.hasOwnProperty(i)){
                     if(prop&&typeof prop==="object"){
-                        var target=Array.isArray(origin)?[]:{};
+                        var target=Array.isArray(origin[i])?[]:{};
                         target[i]=deepClone(prop);
                     }else {
                         target[i]=prop;
