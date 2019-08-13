@@ -852,8 +852,8 @@ JavaScript继承是依靠prototype实现的，先面介绍六种继承方式并�
    可以看作是一个存着未来才会结束的事件的结果，可以获取异步操作的消息。
    等待中（pending）完成了（resolved）拒绝了（rejected），一旦状态改变就不会再回退
    构造promise的内部代码是立即执行的，实现了链式调用，解决了地狱回调问题，但是无法取消promise，错误需要回调函数获取（catch）
-   promise.all() 包含一个含有多个promise对象的数组， 一起执行结束之后，再做下一步操作，如果全部成功执行，则以数组的方式返回所有`Promise`任务的执行结果；如果有一个`Promise`任务 `rejected`，则只返回 `rejected `任务的结果。。
-   promise.race() 包含一个含有多个promise对象的数组，其中一个执行结束之后就可进行下一步操作。
+   promise.all() 包含一个含有多个参数，如果全部成功执行，函数状态为fulfilled，则以数组的方式返回所有`Promise`任务的执行结果；如果有一个`Promise`任务 `rejected`，则只返回第一个被 `rejected `任务的结果。
+   promise.race() 包含一个含有多个promise对象的数组，其中一个执行结束之后就可进行下一步操作。（可以用于设置请求超时，如果在一定时间内执行成功则输出成功结果，如果超时则输出超时结果）
    readyState：0请求未初始化  1服务器连接已建立 2请求已接收 3请求处理中  4请求已完成
    封装ajax
 ```
