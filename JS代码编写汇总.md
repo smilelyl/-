@@ -450,6 +450,7 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 }
 ```
 实现promise.all()
+```
 function promiseAll(promises){
     return new Promise((resolve,reject)=>{
         if(!Array.isArray(promises)){
@@ -473,6 +474,7 @@ function promiseAll(promises){
         }
     })
 }
+```
 ## 功能性
 
 ### 节流和防抖
