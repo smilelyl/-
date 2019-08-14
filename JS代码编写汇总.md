@@ -356,6 +356,7 @@ Function.prototype.myCall=function(context){
 ```
 
 3. bind
+```
    Function.prototype.myBind=function(thisArgs){
     if(typeof this!=="function"){
         throw new Error("erro");
@@ -370,6 +371,7 @@ Function.prototype.myCall=function(context){
     	}        
     }
    }
+```
 4. new
 
 ```
@@ -384,7 +386,93 @@ funtion myNew(fun){
 }
 
 ```
+## 实现promise
+```
+function Promise(executor) {
+    let self = this;
+    self.value  = undefined;
+    self.reason = undefined;
+    self.status = "pending";
+    
+    // 处理setTimeout使状态不能立即改变的情况
+    self.onFullFilledCallbacks = [];
+    self.onRejectedCallbacks = [];
+    
+    function resolve(value) {
+        if (self.status == "pending") {
+            self.value  = value;
+            self.status = "resolved";
+            
+            self.onFullFilledCallbacks.forEach(onFulFilled => onFulFilled());
+        }
+    }
+    
+    function reject(reason) {
+        if (self.status == "pending") {
+            self.reason = reason;
+            self.status = "rejected";
+            
+            self.onRejectedCallbacks.forEach(onRejected => onRejected());
+        }
+    }
+    
+    try {
+        executor(resolve, reject);
+    } catch (error) {
+        reject(error);
+    }
+}
 
+Promise.prototype.then = function(onFulfilled, onRejected) {
+    let p2Resolve, p2Reject;
+    let p2 = new promise((resolve, reject) => {
+        p2Resolve = resolve;
+        p2Reject  = reject;
+    })
+    if (this.status == "pending") {
+        this.onFullFilledCallbacks.push(() => {
+            onFulfilled(this.value);
+            p2Resolve();
+        });
+        this.onRejectedCallbacks.push(() => {
+            onRejected(this.reason);
+            p2Reject();
+        });
+    } else if (this.status == "resolved") {
+        onFulfilled(this.value);
+        p2Resolve();
+    } else if (this.status == "rejected") {
+        onRejected(this.reason);
+        p2Reject();
+    }
+    
+    return p2;
+}
+```
+实现promise.all()
+function promiseAll(promises){
+    return new Promise((resolve,reject)=>{
+        if(!Array.isArray(promises)){
+            return rejcet(new Error("arguments must be an array"))
+        }
+        let promiseCounter=0,
+            promiseNum=promises.length,
+            resolvedValues=new Array(promiseNum);
+        for(let i=0;i<promiseNum;i++){
+            (function(i){
+                Promise.resolve(promises[i]).then((value)=>{
+                    promiseCounter++;
+                    resolvedValues[i]==value;
+                    if(promiseCounter==promiseNum){
+                        return resolve(resolvedValues);
+                    }
+                }).catch(error){
+                    reject(error)
+                }
+            })(i)
+        }
+    })
+}
 ## 功能性
 
 ### 节流和防抖
