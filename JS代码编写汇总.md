@@ -78,7 +78,9 @@ function test(arr){
 }
 ```
 循环、filter的时间复杂度均为n的平方
+
 map、set和reduce的时间复杂度为n
+
 此外indexOf和include的比较：include返回布尔型，indexOf返回数值型，对于if判断来说，include更简单一些。如果要判断元素的位置可以使用indexOf，判断是否包含可以使用include。
 ## 数组扁平化
 
