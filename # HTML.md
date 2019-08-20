@@ -39,3 +39,14 @@ src指向外部资源，指向的内容会加载到当前标签所在位置中�
 1. 离线浏览，在网络不可用的时候也可以使用
 2. 让已缓存资源加载更快
 3. 减少服务器负载，只需要下载浏览器更新过的资源。
+## html5新特性
+1. 语义化标签
+2. 拥有新的input输入类型
+3. 视频和音频（audio和video）
+4. canvas绘画(定义一块画布，使用js进行绘画)
+5. svg
+6. 地理定位（geolocation）
+7. 拖放api
+8. webWorker（在后台执行的js）
+9. web storage(localStorage和sessionStorage)
+10. webSocket
