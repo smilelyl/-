@@ -2,6 +2,10 @@
 ## 优雅降级与渐进增强
   优雅降级：一开始构建完整的功能，然后对低版本进行兼容
   渐进增强：一开始针对低版本浏览器进行构建，然后再针对高级浏览器进行效果交互等的改进。
+## CSS3新特性
+1. css过渡（transition）
+2. css变换（rotate、translate、scale、skew）
+3. css动画（animation）
 ## 盒模型
   盒模型由content内容、内边距padding、border边框以及外边距margin组成。
   
